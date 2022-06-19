@@ -1,10 +1,12 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import cpuReducer from "../features/cpuSilce"
-import { ComputerPart } from "../types";
+import selectionFormReducer from "../features/selectionFormSlice"
+import { SelectionForm } from "../types";
 
 export const store = configureStore({
     reducer: {
         cpu: cpuReducer,
+        form: selectionFormReducer,
     }
 })
 
@@ -17,4 +19,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     Action<string>
 >;
 
-export const selectCpus = (state: RootState): ComputerPart[] => state.cpu.data;
+export const selectCpuBrands = (state: RootState): string[] => state.cpu.brands;
+export const selectCpuModels = (state: RootState): string[] => state.cpu.models;
+export const selectFormValue = (state: RootState): SelectionForm => state.form.form;

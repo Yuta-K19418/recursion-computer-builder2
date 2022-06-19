@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../app/hooks";
 import { fetchCpuDataAsync } from "../features/cpuSilce";
 import CpuForm from "./CpuForm";
 
 const SelectionForm = () => {
+    const { register, handleSubmit, control, reset } = useForm();
     const dispatch = useAppDispatch();
     useEffect(() => {
         // eslint-disable-next-line no-console
@@ -39,7 +41,7 @@ const SelectionForm = () => {
                         width: "100%",
                         height: "100%",
                     }}
-                // onSubmit={() => console.log("")}
+                    onSubmit={() => handleSubmit}
                 >
                     <CpuForm />
                 </form>

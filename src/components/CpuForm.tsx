@@ -1,25 +1,17 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
-import { RootState, selectCpus } from "../app/store";
-import { useAppSelector } from "../app/hooks";
+import { selectCpuBrands, selectCpuModels, selectFormValue } from "../app/store";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { selectCpuBrand, selectCpuModel } from "../features/selectionFormSlice";
+import { setModels } from "../features/cpuSilce";
 
 const CpuComboBox = () => {
-    const cpuData = useAppSelector(selectCpus);
-    const cpuBrands: string[] = [];
-    const cpuModels: string[] = [];
-    cpuData.map((cpu) => {
-        if (cpuBrands.indexOf(cpu.Brand) === -1) {
-            cpuBrands.push(cpu.Brand);
-        }
-        if (cpuModels.indexOf(cpu.Model) === -1) {
-            cpuModels.push(cpu.Model);
-        }
-        return cpu;
-    });
+    const cpuBrands = useAppSelector(selectCpuBrands)
+    const cpuModels = useAppSelector(selectCpuModels)
 
-    cpuBrands.sort();
-    cpuModels.sort();
+    const formValue = useAppSelector(selectFormValue);
+    const dispatch = useAppDispatch();
+
     return (
         <>
             <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", width: "100%" }}>
@@ -40,8 +32,11 @@ const CpuComboBox = () => {
                 <FormControl sx={{ marginTop: 3, width: "45%" }}>
                     <InputLabel>Brand</InputLabel>
                     <Select
-                    // value={props.cpuBrandState}
-                    // onChange={(event: SelectChangeEvent<string>) => props.setCpuBrandState(event.target.value)}
+                        value={formValue.cpu.brand}
+                        onChange={(event: SelectChangeEvent<string>) => {
+                            dispatch(selectCpuBrand(event.target.value));
+                            dispatch(setModels(event.target.value));
+                        }}
                     >
                         {!!cpuBrands &&
                             cpuBrands.length > 0 &&
@@ -55,8 +50,8 @@ const CpuComboBox = () => {
                 <FormControl sx={{ marginTop: 3, width: "45%" }}>
                     <InputLabel>Model</InputLabel>
                     <Select
-                    // value={props.cpuModelState}
-                    // onChange={(event: SelectChangeEvent<string>) => props.setCpuModelState(event.target.value)}
+                        value={formValue.cpu.model}
+                        onChange={(event: SelectChangeEvent<string>) => dispatch(selectCpuModel(event.target.value))}
                     >
                         {!!cpuModels &&
                             cpuModels.length > 0 &&

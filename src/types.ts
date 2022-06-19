@@ -6,3 +6,33 @@ export type ComputerPart = {
     Rank: number;
     Benchmark: number;
 };
+
+export type SelectionForm = {
+    cpu: {
+        model: string;
+        brand: string;
+    },
+    gpu: {
+        model: string;
+        brand: string;
+    },
+    memoryCard: {
+        quantity: number,
+        model: string;
+        brand: string;
+    },
+    storage: {
+        type: Storage,
+        storageCapacity: string,
+        brand: string;
+        model: string;
+    }
+}
+
+export const Storage = {
+    notSelected: "notSelected",
+    hdd: "hdd",
+    ssd: "ssd",
+} as const;
+
+export type Storage = typeof Storage[keyof typeof Storage];
