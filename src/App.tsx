@@ -1,5 +1,6 @@
 import React from "react";
 import AppBar from "./components/AppBar";
+import SelectionForm from "./components/SelectionForm";
 
 const App = () => (
     <div
@@ -13,6 +14,7 @@ const App = () => (
         }}
     >
         <AppBar />
+        <SelectionForm />
     </div>
 );
 
