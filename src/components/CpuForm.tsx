@@ -8,7 +8,6 @@ import { setModels } from "../features/cpuSilce";
 const CpuComboBox = () => {
     const cpuBrands = useAppSelector(selectCpuBrands)
     const cpuModels = useAppSelector(selectCpuModels)
-
     const formValue = useAppSelector(selectFormValue);
     const dispatch = useAppDispatch();
 
