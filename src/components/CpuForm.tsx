@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectCpuBrand, selectCpuModel } from "../features/selectionFormSlice";
 import { setModels } from "../features/cpuSilce";
 
-const CpuComboBox = () => {
+const CpuForm = () => {
     const cpuBrands = useAppSelector(selectCpuBrands)
     const cpuModels = useAppSelector(selectCpuModels)
     const formValue = useAppSelector(selectFormValue);
@@ -66,4 +66,4 @@ const CpuComboBox = () => {
     );
 };
 
-export default CpuComboBox;
+export default CpuForm;
