@@ -17,7 +17,7 @@ export type SelectionForm = {
         brand: string;
     },
     memoryCard: {
-        quantity: number,
+        quantity: string,
         model: string;
         brand: string;
     },

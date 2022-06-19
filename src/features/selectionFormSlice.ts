@@ -16,7 +16,7 @@ const initialState: SelectionFormState = {
             brand: "",
         },
         memoryCard: {
-            quantity: 0,
+            quantity: "",
             model: "",
             brand: "",
         },
@@ -56,6 +56,24 @@ export const selectionFormSlice = createSlice({
         selectGpuModel: (state, action: PayloadAction<string>) => {
             // eslint-disable-next-line no-param-reassign
             state.form.gpu.model = action.payload;
+        },
+        selectMemoryCardQuantity: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.memoryCard.quantity = action.payload;
+            // eslint-disable-next-line no-param-reassign
+            state.form.memoryCard.brand = "";
+            // eslint-disable-next-line no-param-reassign
+            state.form.memoryCard.model = "";
+        },
+        selectMemoryCardBrand: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.memoryCard.brand = action.payload;
+            // eslint-disable-next-line no-param-reassign
+            state.form.memoryCard.model = "";
+        },
+        selectMemoryCardModel: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.memoryCard.model = action.payload;
         }
     }
 })
@@ -65,7 +83,10 @@ export const {
     selectCpuBrand,
     selectCpuModel,
     selectGpuBrand,
-    selectGpuModel
+    selectGpuModel,
+    selectMemoryCardQuantity,
+    selectMemoryCardBrand,
+    selectMemoryCardModel
 } = selectionFormSlice.actions;
 
 export default selectionFormSlice.reducer;
