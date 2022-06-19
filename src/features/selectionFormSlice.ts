@@ -46,10 +46,26 @@ export const selectionFormSlice = createSlice({
         selectCpuModel: (state, action: PayloadAction<string>) => {
             // eslint-disable-next-line no-param-reassign
             state.form.cpu.model = action.payload;
+        },
+        selectGpuBrand: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.gpu.brand = action.payload;
+            // eslint-disable-next-line no-param-reassign
+            state.form.gpu.model = "";
+        },
+        selectGpuModel: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.gpu.model = action.payload;
         }
     }
 })
 
-export const { resetData, selectCpuBrand, selectCpuModel } = selectionFormSlice.actions;
+export const {
+    resetData,
+    selectCpuBrand,
+    selectCpuModel,
+    selectGpuBrand,
+    selectGpuModel
+} = selectionFormSlice.actions;
 
 export default selectionFormSlice.reducer;

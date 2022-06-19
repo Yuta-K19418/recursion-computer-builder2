@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../app/hooks";
 import { fetchCpuDataAsync } from "../features/cpuSilce";
+import { fetchGpuDataAsync } from "../features/gpuSlice";
 import CpuForm from "./CpuForm";
+import GpuForm from "./GpuForm";
 
 const SelectionForm = () => {
     const { register, handleSubmit, control, reset } = useForm();
@@ -10,6 +12,8 @@ const SelectionForm = () => {
     useEffect(() => {
         // eslint-disable-next-line no-console
         dispatch(fetchCpuDataAsync()).catch((e) => console.log(e));
+        // eslint-disable-next-line no-console
+        dispatch(fetchGpuDataAsync()).catch((e) => console.log(e));
     }, [dispatch]);
 
     return (
@@ -44,6 +48,7 @@ const SelectionForm = () => {
                     onSubmit={() => handleSubmit}
                 >
                     <CpuForm />
+                    <GpuForm />
                 </form>
             </div>
         </div>
