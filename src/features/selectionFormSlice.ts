@@ -74,7 +74,35 @@ export const selectionFormSlice = createSlice({
         selectMemoryCardModel: (state, action: PayloadAction<string>) => {
             // eslint-disable-next-line no-param-reassign
             state.form.memoryCard.model = action.payload;
-        }
+        },
+        selectStorageType: (state, action: PayloadAction<Storage>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.type = action.payload;
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.storageCapacity = "";
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.brand = "";
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.model = "";
+        },
+        selectStorageCapacity: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.storageCapacity = action.payload;
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.brand = "";
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.model = "";
+        },
+        selectStorageBrand: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.brand = action.payload;
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.model = "";
+        },
+        selectStorageModel: (state, action: PayloadAction<string>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.form.storage.model = action.payload;
+        },
     }
 })
 
@@ -86,7 +114,11 @@ export const {
     selectGpuModel,
     selectMemoryCardQuantity,
     selectMemoryCardBrand,
-    selectMemoryCardModel
+    selectMemoryCardModel,
+    selectStorageType,
+    selectStorageCapacity,
+    selectStorageBrand,
+    selectStorageModel,
 } = selectionFormSlice.actions;
 
 export default selectionFormSlice.reducer;

@@ -30,9 +30,14 @@ export type SelectionForm = {
 }
 
 export const Storage = {
-    notSelected: "notSelected",
-    hdd: "hdd",
-    ssd: "ssd",
+    notSelected: "Not Selected",
+    hdd: "HDD",
+    ssd: "SSD",
 } as const;
 
 export type Storage = typeof Storage[keyof typeof Storage];
+
+export interface SelectStorageBrandAction {
+    storageCapacity: string,
+    brand: string,
+}
