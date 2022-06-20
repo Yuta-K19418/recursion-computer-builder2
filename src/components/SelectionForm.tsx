@@ -5,6 +5,7 @@ import { fetchCpuDataAsync } from "../features/cpuSilce";
 import { fetchGpuDataAsync } from "../features/gpuSlice";
 import { fetchRamDataAsync } from "../features/ramSlice";
 import { fetchStorageDataAsync } from "../features/storageSlice";
+import AddPCButton from "./AddPCButton";
 import CpuForm from "./CpuForm";
 import GpuForm from "./GpuForm";
 import RamForm from "./RamForm";
@@ -59,6 +60,7 @@ const SelectionForm = () => {
                     <GpuForm />
                     <RamForm />
                     <StorageForm />
+                    <AddPCButton />
                 </form>
             </div>
         </div>
