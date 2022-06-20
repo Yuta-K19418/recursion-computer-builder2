@@ -30,7 +30,7 @@ export type SelectionForm = {
 }
 
 export const Storage = {
-    notSelected: "Not Selected",
+    notSelected: "",
     hdd: "HDD",
     ssd: "SSD",
 } as const;

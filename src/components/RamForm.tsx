@@ -38,6 +38,7 @@ const RamForm = () => {
                             dispatch(selectMemoryCardQuantity(event.target.value));
                             dispatch(setModels(event.target.value));
                         }}
+                        required
                     >
                         {ramQuantity.map((element: string) => (
                             <MenuItem key={element} value={element}>
@@ -54,6 +55,7 @@ const RamForm = () => {
                             dispatch(selectMemoryCardBrand(event.target.value));
                             dispatch(setModels(event.target.value));
                         }}
+                        required
                     >
                         {!!ramBrands &&
                             ramBrands.length > 0 &&
@@ -69,6 +71,7 @@ const RamForm = () => {
                     <Select
                         value={formValue.memoryCard.model}
                         onChange={(event: SelectChangeEvent<string>) => dispatch(selectMemoryCardModel(event.target.value))}
+                        required
                     >
                         {!!ramModels &&
                             ramModels.length > 0 &&

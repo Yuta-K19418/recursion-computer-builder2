@@ -35,6 +35,7 @@ const GpuForm = () => {
                             dispatch(selectGpuBrand(event.target.value));
                             dispatch(setModels(event.target.value));
                         }}
+                        required
                     >
                         {!!gpuBrands &&
                             gpuBrands.length > 0 &&
@@ -50,6 +51,7 @@ const GpuForm = () => {
                     <Select
                         value={formValue.gpu.model}
                         onChange={(event: SelectChangeEvent<string>) => dispatch(selectGpuModel(event.target.value))}
+                        required
                     >
                         {!!gpuModels &&
                             gpuModels.length > 0 &&

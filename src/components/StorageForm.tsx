@@ -43,10 +43,11 @@ const StorageForm = () => {
                                 dispatch(setStorageCapacities(target));
                             }
                         }}
+                        required
                     >
                         {!!storageTypes &&
                             storageTypes.length > 0 &&
-                            storageTypes.map((storageType: string) => (
+                            storageTypes.map(storageType => (
                                 <MenuItem key={storageType} value={storageType}>
                                     {storageType}
                                 </MenuItem>
@@ -61,6 +62,7 @@ const StorageForm = () => {
                             dispatch(selectStorageCapacity(event.target.value));
                             dispatch(setBrands(event.target.value));
                         }}
+                        required
                     >
                         {storageCapacities.map(capacity => (
                             <MenuItem key={capacity} value={capacity}>
@@ -80,6 +82,7 @@ const StorageForm = () => {
                                 brand: event.target.value
                             }));
                         }}
+                        required
                     >
                         {storageBrands.map(brand => (
                             <MenuItem key={brand} value={brand}>
@@ -95,6 +98,7 @@ const StorageForm = () => {
                         onChange={(event: SelectChangeEvent<string>) => {
                             dispatch(selectStorageModel(event.target.value));
                         }}
+                        required
                     >
                         {storageModels.map(model => (
                             <MenuItem key={model} value={model}>

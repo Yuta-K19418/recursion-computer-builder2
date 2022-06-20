@@ -36,6 +36,7 @@ const CpuForm = () => {
                             dispatch(selectCpuBrand(event.target.value));
                             dispatch(setModels(event.target.value));
                         }}
+                        required
                     >
                         {!!cpuBrands &&
                             cpuBrands.length > 0 &&
@@ -51,6 +52,7 @@ const CpuForm = () => {
                     <Select
                         value={formValue.cpu.model}
                         onChange={(event: SelectChangeEvent<string>) => dispatch(selectCpuModel(event.target.value))}
+                        required
                     >
                         {!!cpuModels &&
                             cpuModels.length > 0 &&
