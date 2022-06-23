@@ -3,27 +3,22 @@ import cpuReducer from "../features/cpuSilce";
 import gpuReducer from "../features/gpuSlice";
 import ramReducer from "../features/ramSlice";
 import storageReducer from "../features/storageSlice";
-import selectionFormReducer from "../features/selectionFormSlice"
+import selectionFormReducer from "../features/selectionFormSlice";
 import { SelectionForm } from "../types";
 
 export const store = configureStore({
-    reducer: {
-        cpu: cpuReducer,
-        gpu: gpuReducer,
-        ram: ramReducer,
-        storage: storageReducer,
-        form: selectionFormReducer,
-    }
-})
+  reducer: {
+    cpu: cpuReducer,
+    gpu: gpuReducer,
+    ram: ramReducer,
+    storage: storageReducer,
+    form: selectionFormReducer,
+  },
+});
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-    ReturnType,
-    RootState,
-    unknown,
-    Action<string>
->;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
 
 export const selectCpuBrands = (state: RootState): string[] => state.cpu.brands;
 export const selectCpuModels = (state: RootState): string[] => state.cpu.models;
