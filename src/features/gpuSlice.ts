@@ -13,18 +13,16 @@ const initialState: GpuState = {
   models: [],
 };
 
+/* eslint-disable no-param-reassign */
 export const gpuSlice = createSlice({
   name: "gpu",
   initialState,
   reducers: {
-    clearData: (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.data = [];
-      // eslint-disable-next-line no-param-reassign
-      state.brands = [];
-      // eslint-disable-next-line no-param-reassign
-      state.models = [];
-    },
+    // clearData: (state) => {
+    //   state.data = [];
+    //   state.brands = [];
+    //   state.models = [];
+    // },
     setModels: (state, action: PayloadAction<string>) => {
       const models: string[] = [];
       state.data
@@ -36,13 +34,11 @@ export const gpuSlice = createSlice({
           return gpu;
         });
       models.sort();
-      // eslint-disable-next-line no-param-reassign
       state.models = models;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGpuDataAsync.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.data = action.payload;
       const brands: string[] = [];
       state.data.map((gpu) => {
@@ -52,11 +48,11 @@ export const gpuSlice = createSlice({
         return gpu;
       });
       brands.sort();
-      // eslint-disable-next-line no-param-reassign
       state.brands = brands;
     });
   },
 });
+/* eslint-enable no-param-reassign */
 
 export const fetchGpuDataAsync = createAsyncThunk<ComputerPart[]>("fetchGpuData", async (): Promise<ComputerPart[]> => {
   const gpus = await fetch(`https://api.recursionist.io/builder/computers?type=gpu`, {
@@ -68,6 +64,6 @@ export const fetchGpuDataAsync = createAsyncThunk<ComputerPart[]>("fetchGpuData"
   return gpus;
 });
 
-export const { clearData, setModels } = gpuSlice.actions;
+export const { setModels } = gpuSlice.actions;
 
 export default gpuSlice.reducer;

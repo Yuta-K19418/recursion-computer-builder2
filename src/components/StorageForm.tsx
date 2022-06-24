@@ -9,7 +9,7 @@ import {
   selectStorageModels,
   selectStorageTypes,
 } from "../app/store";
-import { clearData, setBrands, setModels, setStorageCapacities } from "../features/storageSlice";
+import { setBrands, setModels, setStorageCapacities } from "../features/storageSlice";
 import {
   selectStorageBrand,
   selectStorageCapacity,

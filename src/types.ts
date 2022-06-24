@@ -29,6 +29,7 @@ export type SelectionForm = {
   };
 };
 
+/* eslint-disable @typescript-eslint/no-redeclare */
 export const Storage = {
   notSelected: "",
   hdd: "HDD",
@@ -36,6 +37,7 @@ export const Storage = {
 } as const;
 
 export type Storage = typeof Storage[keyof typeof Storage];
+/* eslint-enable @typescript-eslint/no-redeclare */
 
 export interface SelectStorageBrandAction {
   storageCapacity: string;

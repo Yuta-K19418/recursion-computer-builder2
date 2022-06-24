@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, FormControl, InputLabel, Select, SelectChangeEvent, MenuItem } from "@mui/material";
-import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectRamBrands, selectRamModels, selectFormValue, selectRamQuantity } from "../app/store";
 import { setModels } from "../features/ramSlice";

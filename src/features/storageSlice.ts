@@ -17,22 +17,18 @@ const initialState: StorageState = {
   models: [],
 };
 
+/* eslint-disable no-param-reassign */
 export const storageSlice = createSlice({
   name: "storage",
   initialState,
   reducers: {
-    clearData: (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.data = [];
-      // eslint-disable-next-line no-param-reassign
-      state.type = [Storage.hdd, Storage.ssd];
-      // eslint-disable-next-line no-param-reassign
-      state.storageCapacity = [];
-      // eslint-disable-next-line no-param-reassign
-      state.brands = [];
-      // eslint-disable-next-line no-param-reassign
-      state.models = [];
-    },
+    // clearData: (state) => {
+    //   state.data = [];
+    //   state.type = [Storage.hdd, Storage.ssd];
+    //   state.storageCapacity = [];
+    //   state.brands = [];
+    //   state.models = [];
+    // },
     setStorageCapacities: (state, action: PayloadAction<string>) => {
       const capacities: string[] = [];
       state.data.map((storage) => {
@@ -48,11 +44,8 @@ export const storageSlice = createSlice({
         }
         return storage;
       });
-      // eslint-disable-next-line no-param-reassign
       state.storageCapacity = capacities.sort();
-      // eslint-disable-next-line no-param-reassign
       state.brands = [];
-      // eslint-disable-next-line no-param-reassign
       state.models = [];
     },
     setBrands: (state, action: PayloadAction<string>) => {
@@ -64,7 +57,6 @@ export const storageSlice = createSlice({
         return storage;
       });
       brands.sort();
-      // eslint-disable-next-line no-param-reassign
       state.brands = brands;
     },
     setModels: (state, action: PayloadAction<SelectStorageBrandAction>) => {
@@ -78,17 +70,16 @@ export const storageSlice = createSlice({
           return storage;
         });
       models.sort();
-      // eslint-disable-next-line no-param-reassign
       state.models = models;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchStorageDataAsync.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.data = action.payload;
     });
   },
 });
+/* eslint-enable no-param-reassign */
 
 export const fetchStorageDataAsync = createAsyncThunk<ComputerPart[]>(
   "fetchStorageData",
@@ -110,6 +101,6 @@ export const fetchStorageDataAsync = createAsyncThunk<ComputerPart[]>(
   }
 );
 
-export const { clearData, setStorageCapacities, setBrands, setModels } = storageSlice.actions;
+export const { setStorageCapacities, setBrands, setModels } = storageSlice.actions;
 
 export default storageSlice.reducer;

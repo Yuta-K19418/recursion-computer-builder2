@@ -13,18 +13,16 @@ const initialState: CpuState = {
   models: [],
 };
 
+/* eslint-disable no-param-reassign */
 export const cpuSlice = createSlice({
   name: "cpu",
   initialState,
   reducers: {
-    clearData: (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.data = [];
-      // eslint-disable-next-line no-param-reassign
-      state.brands = [];
-      // eslint-disable-next-line no-param-reassign
-      state.models = [];
-    },
+    // clearData: (state) => {
+    //   state.data = [];
+    //   state.brands = [];
+    //   state.models = [];
+    // },
     setModels: (state, action: PayloadAction<string>) => {
       const models: string[] = [];
       state.data
@@ -36,13 +34,11 @@ export const cpuSlice = createSlice({
           return cpu;
         });
       models.sort();
-      // eslint-disable-next-line no-param-reassign
       state.models = models;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCpuDataAsync.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.data = action.payload;
       const brands: string[] = [];
       state.data.map((cpu) => {
@@ -52,11 +48,11 @@ export const cpuSlice = createSlice({
         return cpu;
       });
       brands.sort();
-      // eslint-disable-next-line no-param-reassign
       state.brands = brands;
     });
   },
 });
+/* eslint-enable no-param-reassign */
 
 export const fetchCpuDataAsync = createAsyncThunk<ComputerPart[]>("fetchCpuData", async (): Promise<ComputerPart[]> => {
   const cpus = await fetch(`https://api.recursionist.io/builder/computers?type=cpu`, {
@@ -68,6 +64,6 @@ export const fetchCpuDataAsync = createAsyncThunk<ComputerPart[]>("fetchCpuData"
   return cpus;
 });
 
-export const { clearData, setModels } = cpuSlice.actions;
+export const { setModels } = cpuSlice.actions;
 
 export default cpuSlice.reducer;

@@ -12,17 +12,15 @@ import RamForm from "./RamForm";
 import StorageForm from "./StorageForm";
 
 const SelectionForm = () => {
-  const { register, handleSubmit, control, reset } = useForm();
+  const { handleSubmit } = useForm();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    // eslint-disable-next-line no-console
+    /* eslint-disable no-console */
     dispatch(fetchCpuDataAsync()).catch((e) => console.log(e));
-    // eslint-disable-next-line no-console
     dispatch(fetchGpuDataAsync()).catch((e) => console.log(e));
-    // eslint-disable-next-line no-console
     dispatch(fetchRamDataAsync()).catch((e) => console.log(e));
-    // eslint-disable-next-line no-console
     dispatch(fetchStorageDataAsync()).catch((e) => console.log(e));
+    /* eslint-enable no-console */
   }, [dispatch]);
 
   return (

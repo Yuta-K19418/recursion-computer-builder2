@@ -15,20 +15,17 @@ const initialState: RamState = {
   models: [],
 };
 
+/* eslint-disable no-param-reassign */
 export const ramSlice = createSlice({
   name: "ram",
   initialState,
   reducers: {
-    clearData: (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.data = [];
-      // eslint-disable-next-line no-param-reassign
-      state.quantity = [];
-      // eslint-disable-next-line no-param-reassign
-      state.brands = [];
-      // eslint-disable-next-line no-param-reassign
-      state.models = [];
-    },
+    // clearData: (state) => {
+    //   state.data = [];
+    //   state.quantity = [];
+    //   state.brands = [];
+    //   state.models = [];
+    // },
     setModels: (state, action: PayloadAction<string>) => {
       const models: string[] = [];
       state.data
@@ -40,13 +37,11 @@ export const ramSlice = createSlice({
           return ram;
         });
       models.sort();
-      // eslint-disable-next-line no-param-reassign
       state.models = models;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchRamDataAsync.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.data = action.payload;
       const brands: string[] = [];
       state.data.map((ram) => {
@@ -56,11 +51,11 @@ export const ramSlice = createSlice({
         return ram;
       });
       brands.sort();
-      // eslint-disable-next-line no-param-reassign
       state.brands = brands;
     });
   },
 });
+/* eslint-enable no-param-reassign */
 
 export const fetchRamDataAsync = createAsyncThunk<ComputerPart[]>("fetchRamData", async (): Promise<ComputerPart[]> => {
   const rams = await fetch(`https://api.recursionist.io/builder/computers?type=ram`, {
@@ -72,6 +67,6 @@ export const fetchRamDataAsync = createAsyncThunk<ComputerPart[]>("fetchRamData"
   return rams;
 });
 
-export const { clearData, setModels } = ramSlice.actions;
+export const { setModels } = ramSlice.actions;
 
 export default ramSlice.reducer;
