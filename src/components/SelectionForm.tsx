@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../app/hooks";
 import { fetchCpuDataAsync } from "../features/cpuSilce";
 import { fetchGpuDataAsync } from "../features/gpuSlice";
 import { fetchRamDataAsync } from "../features/ramSlice";
+import { addSelectedPC } from "../features/selectionFormSlice";
 import { fetchStorageDataAsync } from "../features/storageSlice";
 import AddPCButton from "./AddPCButton";
 import CpuForm from "./CpuForm";
@@ -12,7 +12,6 @@ import RamForm from "./RamForm";
 import StorageForm from "./StorageForm";
 
 const SelectionForm = () => {
-  const { handleSubmit } = useForm();
   const dispatch = useAppDispatch();
   useEffect(() => {
     /* eslint-disable no-console */
@@ -22,6 +21,11 @@ const SelectionForm = () => {
     dispatch(fetchStorageDataAsync()).catch((e) => console.log(e));
     /* eslint-enable no-console */
   }, [dispatch]);
+
+  const handleAddPC = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(addSelectedPC());
+  };
 
   return (
     <div
@@ -52,7 +56,7 @@ const SelectionForm = () => {
             width: "100%",
             height: "100%",
           }}
-          onSubmit={() => handleSubmit}
+          onSubmit={(event: React.FormEvent<HTMLFormElement>) => handleAddPC(event)}
         >
           <CpuForm />
           <GpuForm />

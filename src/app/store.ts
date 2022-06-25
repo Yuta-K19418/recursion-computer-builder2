@@ -4,7 +4,7 @@ import gpuReducer from "../features/gpuSlice";
 import ramReducer from "../features/ramSlice";
 import storageReducer from "../features/storageSlice";
 import selectionFormReducer from "../features/selectionFormSlice";
-import { SelectionForm } from "../types";
+import { SelectedPC, SelectionForm } from "../types";
 
 export const store = configureStore({
   reducer: {
@@ -46,3 +46,4 @@ export const selectStorageBenchmark = (state: RootState): number =>
     (v) => v.Brand === state.form.form.storage.brand && v.Model === state.form.form.storage.model
   )[0]?.Benchmark ?? 0;
 export const selectFormValue = (state: RootState): SelectionForm => state.form.form;
+export const selectAddedPCs = (state: RootState): SelectedPC[] => state.form.selectedPCs;

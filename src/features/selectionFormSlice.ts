@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SelectionForm, Storage } from "../types";
+import { BenchMarks, SelectedPC, SelectionForm, Storage } from "../types";
 
 export interface SelectionFormState {
   form: SelectionForm;
+  selectedPCs: SelectedPC[];
 }
 
 const initialState: SelectionFormState = {
@@ -31,6 +32,7 @@ const initialState: SelectionFormState = {
       benchmark: 0,
     },
   },
+  selectedPCs: [],
 };
 
 /* eslint-disable no-param-reassign */
@@ -108,6 +110,30 @@ export const selectionFormSlice = createSlice({
     putStorageBenchmark: (state, action: PayloadAction<number>) => {
       state.form.storage.benchmark = action.payload;
     },
+    addSelectedPC: (state) => {
+      const gamingBenchMarks: BenchMarks = {
+        cpuScore: Math.round(state.form.cpu.benchmark * 0.25),
+        gpuScore: Math.round(state.form.gpu.benchmark * 0.6),
+        memoryCardScore: Math.round(state.form.memoryCard.benchmark * 0.125),
+        storageScore: Math.round(
+          state.form.storage.benchmark * (state.form.storage.type === Storage.hdd ? 0.025 : 0.1)
+        ),
+      };
+      const workBenchMarks: BenchMarks = {
+        cpuScore: Math.round(state.form.cpu.benchmark * 0.6),
+        gpuScore: Math.round(state.form.gpu.benchmark * 0.25),
+        memoryCardScore: Math.round(state.form.memoryCard.benchmark * 0.1),
+        storageScore: Math.round(state.form.storage.benchmark * 0.05),
+      };
+      state.selectedPCs = [
+        ...state.selectedPCs,
+        {
+          form: state.form,
+          gamingBenchMarks,
+          workBenchMarks,
+        },
+      ];
+    },
   },
 });
 /* eslint-enable no-param-reassign */
@@ -129,6 +155,7 @@ export const {
   putStorageBrand,
   putStorageModel,
   putStorageBenchmark,
+  addSelectedPC,
 } = selectionFormSlice.actions;
 
 export default selectionFormSlice.reducer;

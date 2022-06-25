@@ -1,10 +1,14 @@
-import { Typography } from "@mui/material";
 import React from "react";
-import { useAppSelector } from "../app/hooks";
-import { selectFormValue } from "../app/store";
+import { Typography } from "@mui/material";
+import { SelectedPC } from "../types";
 
-const SelectedResult = () => {
-  const formValue = useAppSelector(selectFormValue);
+interface Props {
+  selectedPC: SelectedPC;
+  index: number;
+}
+
+const SelectedResult = (props: Props) => {
+  const { selectedPC, index } = props;
   return (
     <div
       style={{
@@ -43,7 +47,7 @@ const SelectedResult = () => {
                 color: "white",
               }}
             >
-              Your PC1
+              Your PC{index}
             </Typography>
           </div>
           <div
@@ -82,7 +86,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Brand : {formValue.cpu.brand}
+                Brand : {selectedPC.form.cpu.brand}
               </Typography>
             </div>
             <div
@@ -99,7 +103,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Model : {formValue.cpu.model}
+                Model : {selectedPC.form.cpu.model}
               </Typography>
             </div>
           </div>
@@ -139,7 +143,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Brand : {formValue.gpu.brand}
+                Brand : {selectedPC.form.gpu.brand}
               </Typography>
             </div>
             <div
@@ -156,7 +160,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Model : {formValue.gpu.model}
+                Model : {selectedPC.form.gpu.model}
               </Typography>
             </div>
           </div>
@@ -196,7 +200,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Brand : {formValue.memoryCard.brand}
+                Brand : {selectedPC.form.memoryCard.brand}
               </Typography>
             </div>
             <div
@@ -213,7 +217,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Model : {formValue.memoryCard.model}
+                Model : {selectedPC.form.memoryCard.model}
               </Typography>
             </div>
           </div>
@@ -253,7 +257,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Disk : {formValue.storage.type}
+                Disk : {selectedPC.form.storage.type}
               </Typography>
             </div>
             <div
@@ -270,7 +274,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Storage : {formValue.storage.storageCapacity}
+                Storage : {selectedPC.form.storage.storageCapacity}
               </Typography>
             </div>
             <div
@@ -287,7 +291,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Brand : {formValue.storage.brand}
+                Brand : {selectedPC.form.storage.brand}
               </Typography>
             </div>
             <div
@@ -304,7 +308,7 @@ const SelectedResult = () => {
                   color: "white",
                 }}
               >
-                Model : {formValue.storage.model}
+                Model : {selectedPC.form.storage.model}
               </Typography>
             </div>
           </div>
@@ -322,7 +326,7 @@ const SelectedResult = () => {
                 width: "40%",
               }}
             >
-              Gaming :
+              Gaming : {Object.values(selectedPC.gamingBenchMarks).reduce((pv: number, cv: number) => pv + cv, 0)}%
             </Typography>
             <Typography
               variant="h4"
@@ -331,7 +335,7 @@ const SelectedResult = () => {
                 width: "40%",
               }}
             >
-              Work :
+              Work : {Object.values(selectedPC.workBenchMarks).reduce((pv: number, cv: number) => pv + cv, 0)}%
             </Typography>
           </div>
         </div>
