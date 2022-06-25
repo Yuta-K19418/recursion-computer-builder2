@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
-import { selectCpuBrands, selectCpuModels, selectFormValue } from "../app/store";
+import { selectCpuBenchmark, selectCpuBrands, selectCpuModels, selectFormValue } from "../app/store";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { selectCpuBrand, selectCpuModel } from "../features/selectionFormSlice";
+import { putCpuBenchmark, putCpuBrand, putCpuModel } from "../features/selectionFormSlice";
 import { setModels } from "../features/cpuSilce";
 
 const CpuForm = () => {
   const cpuBrands = useAppSelector(selectCpuBrands);
   const cpuModels = useAppSelector(selectCpuModels);
+  const cpuBenchmark = useAppSelector(selectCpuBenchmark);
   const formValue = useAppSelector(selectFormValue);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(putCpuBenchmark(cpuBenchmark));
+  }, [dispatch, cpuBenchmark]);
 
   return (
     <>
@@ -33,7 +38,7 @@ const CpuForm = () => {
           <Select
             value={formValue.cpu.brand}
             onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(selectCpuBrand(event.target.value));
+              dispatch(putCpuBrand(event.target.value));
               dispatch(setModels(event.target.value));
             }}
             required
@@ -51,7 +56,7 @@ const CpuForm = () => {
           <InputLabel>Model</InputLabel>
           <Select
             value={formValue.cpu.model}
-            onChange={(event: SelectChangeEvent<string>) => dispatch(selectCpuModel(event.target.value))}
+            onChange={(event: SelectChangeEvent<string>) => dispatch(putCpuModel(event.target.value))}
             required
           >
             {!!cpuModels &&

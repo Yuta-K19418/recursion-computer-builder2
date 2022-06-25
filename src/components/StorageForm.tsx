@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { Storage } from "../types";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
   selectFormValue,
+  selectStorageBenchmark,
   selectStorageBrands,
   selectStorageCapacities,
   selectStorageModels,
@@ -11,10 +12,11 @@ import {
 } from "../app/store";
 import { setBrands, setModels, setStorageCapacities } from "../features/storageSlice";
 import {
-  selectStorageBrand,
-  selectStorageCapacity,
-  selectStorageModel,
-  selectStorageType,
+  putStorageBenchmark,
+  putStorageBrand,
+  putStorageCapacity,
+  putStorageModel,
+  putStorageType,
 } from "../features/selectionFormSlice";
 
 const StorageForm = () => {
@@ -22,8 +24,13 @@ const StorageForm = () => {
   const storageCapacities = useAppSelector(selectStorageCapacities);
   const storageBrands = useAppSelector(selectStorageBrands);
   const storageModels = useAppSelector(selectStorageModels);
+  const storageBenchmark = useAppSelector(selectStorageBenchmark);
   const formValue = useAppSelector(selectFormValue);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(putStorageBenchmark(storageBenchmark));
+  }, [dispatch, storageBenchmark]);
 
   return (
     <>
@@ -49,7 +56,7 @@ const StorageForm = () => {
             onChange={(event: SelectChangeEvent<string>) => {
               const target = event.target.value;
               if (target === Storage.hdd || target === Storage.ssd) {
-                dispatch(selectStorageType(target));
+                dispatch(putStorageType(target));
                 // dispatch(clearData());
                 dispatch(setStorageCapacities(target));
               }
@@ -70,7 +77,7 @@ const StorageForm = () => {
           <Select
             value={formValue.storage.storageCapacity}
             onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(selectStorageCapacity(event.target.value));
+              dispatch(putStorageCapacity(event.target.value));
               dispatch(setBrands(event.target.value));
             }}
             required
@@ -87,7 +94,7 @@ const StorageForm = () => {
           <Select
             value={formValue.storage.brand}
             onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(selectStorageBrand(event.target.value));
+              dispatch(putStorageBrand(event.target.value));
               dispatch(
                 setModels({
                   storageCapacity: formValue.storage.storageCapacity,
@@ -109,7 +116,7 @@ const StorageForm = () => {
           <Select
             value={formValue.storage.model}
             onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(selectStorageModel(event.target.value));
+              dispatch(putStorageModel(event.target.value));
             }}
             required
           >

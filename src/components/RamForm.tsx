@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Typography, FormControl, InputLabel, Select, SelectChangeEvent, MenuItem } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { selectRamBrands, selectRamModels, selectFormValue, selectRamQuantity } from "../app/store";
+import { selectRamBrands, selectRamModels, selectFormValue, selectRamQuantity, selectRamBenchmark } from "../app/store";
 import { setModels } from "../features/ramSlice";
-import { selectMemoryCardBrand, selectMemoryCardModel, selectMemoryCardQuantity } from "../features/selectionFormSlice";
+import {
+  putMemoryCardBenchmark,
+  putMemoryCardBrand,
+  putMemoryCardModel,
+  putMemoryCardQuantity,
+} from "../features/selectionFormSlice";
 
 const RamForm = () => {
   const ramQuantity = useAppSelector(selectRamQuantity);
   const ramBrands = useAppSelector(selectRamBrands);
   const ramModels = useAppSelector(selectRamModels);
+  const ramBenchmark = useAppSelector(selectRamBenchmark);
   const formValue = useAppSelector(selectFormValue);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(putMemoryCardBenchmark(ramBenchmark));
+  }, [dispatch, ramBenchmark]);
 
   return (
     <>
@@ -34,7 +44,7 @@ const RamForm = () => {
           <Select
             value={formValue.memoryCard.quantity}
             onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(selectMemoryCardQuantity(event.target.value));
+              dispatch(putMemoryCardQuantity(event.target.value));
               dispatch(setModels(event.target.value));
             }}
             required
@@ -51,7 +61,7 @@ const RamForm = () => {
           <Select
             value={formValue.memoryCard.brand}
             onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(selectMemoryCardBrand(event.target.value));
+              dispatch(putMemoryCardBrand(event.target.value));
               dispatch(setModels(event.target.value));
             }}
             required
@@ -69,7 +79,7 @@ const RamForm = () => {
           <InputLabel>Model</InputLabel>
           <Select
             value={formValue.memoryCard.model}
-            onChange={(event: SelectChangeEvent<string>) => dispatch(selectMemoryCardModel(event.target.value))}
+            onChange={(event: SelectChangeEvent<string>) => dispatch(putMemoryCardModel(event.target.value))}
             required
           >
             {!!ramModels &&

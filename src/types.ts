@@ -11,21 +11,25 @@ export type SelectionForm = {
   cpu: {
     model: string;
     brand: string;
+    benchmark: number;
   };
   gpu: {
     model: string;
     brand: string;
+    benchmark: number;
   };
   memoryCard: {
     quantity: string;
     model: string;
     brand: string;
+    benchmark: number;
   };
   storage: {
     type: Storage;
     storageCapacity: string;
     brand: string;
     model: string;
+    benchmark: number;
   };
 };
 
@@ -42,4 +46,17 @@ export type Storage = typeof Storage[keyof typeof Storage];
 export interface SelectStorageBrandAction {
   storageCapacity: string;
   brand: string;
+}
+
+export interface SelectedPC {
+  form: SelectionForm;
+  gamingBenchMarks: BenchMarks;
+  workBenchMarks: BenchMarks;
+}
+
+export interface BenchMarks {
+  cpuScore: number;
+  gpuScore: number;
+  memoryCardScore: number;
+  storageScore: number;
 }

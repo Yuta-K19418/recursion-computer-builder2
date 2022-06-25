@@ -10,21 +10,25 @@ const initialState: SelectionFormState = {
     cpu: {
       model: "",
       brand: "",
+      benchmark: 0,
     },
     gpu: {
       model: "",
       brand: "",
+      benchmark: 0,
     },
     memoryCard: {
       quantity: "",
       model: "",
       brand: "",
+      benchmark: 0,
     },
     storage: {
       type: Storage.notSelected,
       storageCapacity: "",
       brand: "",
       model: "",
+      benchmark: 0,
     },
   },
 };
@@ -37,49 +41,72 @@ export const selectionFormSlice = createSlice({
     resetData: (state) => {
       state = initialState;
     },
-    selectCpuBrand: (state, action: PayloadAction<string>) => {
+    putCpuBrand: (state, action: PayloadAction<string>) => {
       state.form.cpu.brand = action.payload;
       state.form.cpu.model = "";
+      state.form.cpu.benchmark = 0;
     },
-    selectCpuModel: (state, action: PayloadAction<string>) => {
+    putCpuModel: (state, action: PayloadAction<string>) => {
       state.form.cpu.model = action.payload;
+      state.form.cpu.benchmark = 0;
     },
-    selectGpuBrand: (state, action: PayloadAction<string>) => {
+    putCpuBenchmark: (state, action: PayloadAction<number>) => {
+      state.form.cpu.benchmark = action.payload;
+    },
+    putGpuBrand: (state, action: PayloadAction<string>) => {
       state.form.gpu.brand = action.payload;
       state.form.gpu.model = "";
+      state.form.gpu.benchmark = 0;
     },
-    selectGpuModel: (state, action: PayloadAction<string>) => {
+    putGpuModel: (state, action: PayloadAction<string>) => {
       state.form.gpu.model = action.payload;
+      state.form.gpu.benchmark = 0;
     },
-    selectMemoryCardQuantity: (state, action: PayloadAction<string>) => {
+    putGpuBenchmark: (state, action: PayloadAction<number>) => {
+      state.form.gpu.benchmark = action.payload;
+    },
+    putMemoryCardQuantity: (state, action: PayloadAction<string>) => {
       state.form.memoryCard.quantity = action.payload;
       state.form.memoryCard.brand = "";
       state.form.memoryCard.model = "";
+      state.form.memoryCard.benchmark = 0;
     },
-    selectMemoryCardBrand: (state, action: PayloadAction<string>) => {
+    putMemoryCardBrand: (state, action: PayloadAction<string>) => {
       state.form.memoryCard.brand = action.payload;
       state.form.memoryCard.model = "";
+      state.form.memoryCard.benchmark = 0;
     },
-    selectMemoryCardModel: (state, action: PayloadAction<string>) => {
+    putMemoryCardModel: (state, action: PayloadAction<string>) => {
       state.form.memoryCard.model = action.payload;
+      state.form.memoryCard.benchmark = 0;
     },
-    selectStorageType: (state, action: PayloadAction<Storage>) => {
+    putMemoryCardBenchmark: (state, action: PayloadAction<number>) => {
+      state.form.memoryCard.benchmark = action.payload;
+    },
+    putStorageType: (state, action: PayloadAction<Storage>) => {
       state.form.storage.type = action.payload;
       state.form.storage.storageCapacity = "";
       state.form.storage.brand = "";
       state.form.storage.model = "";
+      state.form.storage.benchmark = 0;
     },
-    selectStorageCapacity: (state, action: PayloadAction<string>) => {
+    putStorageCapacity: (state, action: PayloadAction<string>) => {
       state.form.storage.storageCapacity = action.payload;
       state.form.storage.brand = "";
       state.form.storage.model = "";
+      state.form.storage.benchmark = 0;
     },
-    selectStorageBrand: (state, action: PayloadAction<string>) => {
+    putStorageBrand: (state, action: PayloadAction<string>) => {
       state.form.storage.brand = action.payload;
       state.form.storage.model = "";
+      state.form.storage.benchmark = 0;
     },
-    selectStorageModel: (state, action: PayloadAction<string>) => {
+    putStorageModel: (state, action: PayloadAction<string>) => {
       state.form.storage.model = action.payload;
+      state.form.storage.benchmark = 0;
+    },
+    putStorageBenchmark: (state, action: PayloadAction<number>) => {
+      state.form.storage.benchmark = action.payload;
     },
   },
 });
@@ -87,17 +114,21 @@ export const selectionFormSlice = createSlice({
 
 export const {
   resetData,
-  selectCpuBrand,
-  selectCpuModel,
-  selectGpuBrand,
-  selectGpuModel,
-  selectMemoryCardQuantity,
-  selectMemoryCardBrand,
-  selectMemoryCardModel,
-  selectStorageType,
-  selectStorageCapacity,
-  selectStorageBrand,
-  selectStorageModel,
+  putCpuBrand,
+  putCpuModel,
+  putCpuBenchmark,
+  putGpuBrand,
+  putGpuModel,
+  putGpuBenchmark,
+  putMemoryCardQuantity,
+  putMemoryCardBrand,
+  putMemoryCardModel,
+  putMemoryCardBenchmark,
+  putStorageType,
+  putStorageCapacity,
+  putStorageBrand,
+  putStorageModel,
+  putStorageBenchmark,
 } = selectionFormSlice.actions;
 
 export default selectionFormSlice.reducer;
