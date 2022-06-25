@@ -45,7 +45,6 @@ const RamForm = () => {
             value={formValue.memoryCard.quantity}
             onChange={(event: SelectChangeEvent<string>) => {
               dispatch(putMemoryCardQuantity(event.target.value));
-              dispatch(setModels(event.target.value));
             }}
             required
           >
@@ -62,7 +61,7 @@ const RamForm = () => {
             value={formValue.memoryCard.brand}
             onChange={(event: SelectChangeEvent<string>) => {
               dispatch(putMemoryCardBrand(event.target.value));
-              dispatch(setModels(event.target.value));
+              dispatch(setModels({ quantity: formValue.memoryCard.quantity, brand: event.target.value }));
             }}
             required
           >

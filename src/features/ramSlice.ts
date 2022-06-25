@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ComputerPart } from "../types";
+import { ComputerPart, SelectMemoryCardBrandAction } from "../types";
 
 export interface RamState {
   data: ComputerPart[];
@@ -26,12 +26,14 @@ export const ramSlice = createSlice({
     //   state.brands = [];
     //   state.models = [];
     // },
-    setModels: (state, action: PayloadAction<string>) => {
+    setModels: (state, action: PayloadAction<SelectMemoryCardBrandAction>) => {
       const models: string[] = [];
       state.data
-        .filter((ram) => ram.Brand === action.payload)
+        .filter((ram) => ram.Brand === action.payload.brand)
         .map((ram) => {
-          if (models.indexOf(ram.Model) === -1) {
+          const pattern = new RegExp(`${action.payload.quantity}x[0-9]{1,2}[MGT]B`, "g");
+          const result = ram.Model.match(pattern);
+          if (result !== null && result.length > 0 && models.indexOf(ram.Model) === -1) {
             models.push(ram.Model);
           }
           return ram;

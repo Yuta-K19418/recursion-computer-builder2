@@ -43,6 +43,11 @@ export const Storage = {
 export type Storage = typeof Storage[keyof typeof Storage];
 /* eslint-enable @typescript-eslint/no-redeclare */
 
+export interface SelectMemoryCardBrandAction {
+  quantity: string;
+  brand: string;
+}
+
 export interface SelectStorageBrandAction {
   storageCapacity: string;
   brand: string;
